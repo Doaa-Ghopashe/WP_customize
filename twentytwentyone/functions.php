@@ -657,13 +657,13 @@ endif;
 //
 function nw_custom_pt_article() {
 	 $labels = array(
-	      'name'                     => __( 'FAQ', 'article' ),
-	      'singular_name'            => __( 'FAQ', 'article' ),
-	      'add_new_item'             => __( 'Add New FAQ', 'article' ),
-	      'edit_item'                => __( 'Edit FAQ', 'article' ),
-	      'insert_into_item'         => __( 'Insert into FAQ', 'article' ),
-	      'view_item'                => __( 'View FAQ', 'article' ),
-	      'menu_name'                => __( 'FAQ', 'article' )
+	      'name'                     => __( 'FAQ', 'FAQ' ),
+	      'singular_name'            => __( 'FAQ', 'FAQ' ),
+	      'add_new_item'             => __( 'Add New FAQ', 'FAQ' ),
+	      'edit_item'                => __( 'Edit FAQ', 'FAQ' ),
+	      'insert_into_item'         => __( 'Insert into FAQ', 'FAQ' ),
+	      'view_item'                => __( 'View FAQ', 'FAQ' ),
+	      'menu_name'                => __( 'FAQ', 'FAQ' )
 	   );
 	$args = array(
 		'labels' => $labels,
@@ -679,7 +679,7 @@ function nw_custom_pt_article() {
 		'capability_type'=>'post',
 		
 	);
-	register_post_type( 'article', $args );
+	register_post_type( 'FAQ', $args );
 }
 add_action( 'init', 'nw_custom_pt_article' );
 
@@ -690,7 +690,7 @@ class wpc_question{
 	}
 	
 	public function custom_meta_box(){
-		add_meta_box('wpc_editor','Questions',[$this,'meta_box_html'],['article']);
+		add_meta_box('wpc_editor','Questions',[$this,'meta_box_html'],['FAQ']);
 	}
 	public function meta_box_html(){
 		$comments_query = new WP_Comment_Query([
@@ -737,7 +737,7 @@ class wpc_question{
 						right:0;
 						cursor:pointer
 						'
-						onclick='playpla(\"{$comment->comment_content}\")'>
+						onclick='setTitle(\"{$comment->comment_content}\")'>
 
 							<i class='fa-solid fa-reply'></i>
 							
@@ -761,7 +761,7 @@ class wpc_question{
 new wpc_question();
 
 echo"<script>
-	function playpla(comment){
+	function setTitle(comment){
 		let title = document.getElementById('title');
 		title.value = comment
 	}
