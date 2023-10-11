@@ -675,7 +675,7 @@ function nw_custom_pt_article() {
 		'has_archive' => true,
 		'rewrite'  => array( 'slug' => 'FAQ' ),
 		'menu_icon'=>'dashicons-format-chat',
-		'supports'=>array('author'),
+		'supports'=>array('author','editor','title'),
 		'capability_type'=>'post',
 		
 	);
@@ -708,10 +708,38 @@ class wpc_question{
 			<?php
 				foreach($comments as $comment){
 					echo '
-					<div style="background-color:#80808047;padding:5px;margin-bottom:8px;border:1px solid gray;position:relative">
+					<div style="background-color:#80808047;
+					overflow:hidden;
+					margin-bottom:8px;
+					border: 1px solid #80808073;
+					position: relative;
+					border-radius: 5px;">
+
 						<span style="position:absolute;right:5px;top:0">'.$comment->comment_date.'</span>
-						<span>'.$comment->comment_author.'</span>
-						<p style="font-size:18px;text-transform: capitalize;">'.$comment->comment_content.'</p>
+
+						<span style="background: #6262628f;
+						color: white;
+						padding: 5px;
+						font-size: 14px;
+						font-weight: 500;
+						text-transform: uppercase;
+						border-radius:0 0 5px 0">'.$comment->comment_author.'</span>
+
+						<p style="font-size:18px;
+						text-transform: capitalize;
+						padding:5px;">'.$comment->comment_content.'</p>
+
+						<button style="position:absolute;
+						background:none;
+						border:none;
+						text-decoration:underline
+						;bottom:5px;right:0">
+
+							<i class="fa-solid fa-reply"></i>
+							
+							Reply
+
+						</button>
 					</div>';
 				}
 			?>
@@ -728,20 +756,4 @@ class wpc_question{
 
 new wpc_question();
 
-class wpc_response{
 
-	public function __construct(){
-		add_action('add_meta_boxes',[$this, 'custom_meta_box']);
-	}
-	
-	public function custom_meta_box(){
-		add_meta_box('wpc_answer','Response',[$this,'meta_box_html'],['article']);
-	}
-	public function meta_box_html(){
-		?>
-			<textarea style="width: 100%;max-height:200px;min-height:200px"></textarea>
-		<?php
-	}
-}
-
-new wpc_response();
