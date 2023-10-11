@@ -707,40 +707,44 @@ class wpc_question{
 		<div style="overflow-y: scroll;min-height:100px">
 			<?php
 				foreach($comments as $comment){
-					echo '
-					<div style="background-color:#80808047;
+					echo "
+					<div style='background-color:#80808047;
 					overflow:hidden;
 					margin-bottom:8px;
 					border: 1px solid #80808073;
 					position: relative;
-					border-radius: 5px;">
+					border-radius: 5px;'>
 
-						<span style="position:absolute;right:5px;top:0">'.$comment->comment_date.'</span>
+						<span style='position:absolute;right:5px;top:0'>".$comment->comment_date."</span>
 
-						<span style="background: #6262628f;
+						<span style='background: #6262628f;
 						color: white;
 						padding: 5px;
 						font-size: 14px;
 						font-weight: 500;
 						text-transform: uppercase;
-						border-radius:0 0 5px 0">'.$comment->comment_author.'</span>
+						border-radius:0 0 5px 0'>".$comment->comment_author."</span>
 
-						<p style="font-size:18px;
+						<p style='font-size:18px;
 						text-transform: capitalize;
-						padding:5px;">'.$comment->comment_content.'</p>
+						padding:5px;'>".$comment->comment_content."</p>
 
-						<button style="position:absolute;
+						<span style='position:absolute;
 						background:none;
 						border:none;
-						text-decoration:underline
-						;bottom:5px;right:0">
+						text-decoration:underline;
+						bottom:5px;
+						right:0;
+						cursor:pointer
+						'
+						onclick='playpla(\"{$comment->comment_content}\")'>
 
-							<i class="fa-solid fa-reply"></i>
+							<i class='fa-solid fa-reply'></i>
 							
 							Reply
 
-						</button>
-					</div>';
+						</span>
+					</div>";
 				}
 			?>
 		</div>
@@ -756,4 +760,10 @@ class wpc_question{
 
 new wpc_question();
 
+echo"<script>
+	function playpla(comment){
+		let title = document.getElementById('title');
+		title.value = comment
+	}
+</script>";
 
